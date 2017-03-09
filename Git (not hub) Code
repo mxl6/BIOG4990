@@ -17,3 +17,4 @@ dhcp-clara-6033:~ mintwealth$
 dhcp-clara-6033:~ mintwealth$ git config --list
 dhcp-clara-6033:~ mintwealth$ git config user.name
 
+#http://r-bio.github.io/intro-git-rstudio/
