@@ -1,7 +1,19 @@
+#In General
+#http://www.molecularecologist.com/2013/11/using-github-with-r-and-rstudio/
+
+#After Install
+#Using
+#http://burnedpixel.com/blog/setting-up-git-and-github-on-your-mac/
 dhcp-clara-6033:~ mintwealth$ git --version
 #git version 2.10.1
-dhcp-clara-6033:~ mintwealth$ git config --global user.name "MLun"
+dhcp-clara-6033:~ mintwealth$ git config --global user.name "mxl6"
 dhcp-clara-6033:~ mintwealth$ git config --global user.email "mxl5@cornell.edu"
 dhcp-clara-6033:~ mintwealth$ git credential-osxkeychain
 usage: git credential-osxkeychain <get|store|erase>
 dhcp-clara-6033:~ mintwealth$ 
+
+#Using
+#https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup
+dhcp-clara-6033:~ mintwealth$ git config --list
+dhcp-clara-6033:~ mintwealth$ git config user.name
+
