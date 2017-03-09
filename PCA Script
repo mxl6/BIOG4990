@@ -1,0 +1,69 @@
+#S17 With Tail PCA
+#Using only two data sets, both from Alaska.
+rm(list = ls())
+#shift+cmd+F10
+#ctrl+L
+setwd("/Users/mintwealth/Documents/Ses 4/4990/S17 WD")
+getwd()
+dir()
+
+###Importing data into R.
+# Here, I have used a comma-separated .csv file:
+#, stringsAsFactors=FALSE
+Tails<- read.csv("S17_Landmarks - DLoad_Tail.csv")
+Tails
+
+#Let's see if that worked:
+###list all the column names in the dataset:
+names(Tails)
+
+attach(Tails)
+
+nrow(Tails)
+#23
+
+ncol(Tails)
+#43
+
+###Now we're finally ready to run the principal components analysis.
+
+sapply(Tails, is.numeric)
+TailNumb<- Tails[, sapply(Tails, is.numeric)]
+library(psych)
+
+USJudgeRatings
+nrow(USJudgeRatings)
+#43
+ncol(USJudgeRatings)
+#12
+USJudgeRatings[,-1]
+
+PCNumber_Plot=fa.parallel(TailNumb, n.iter=100, main="Scree plot with parallel analysis")
+PCNumber_Plot
+#Graphs says 7 PC's. Code says only 1. Hmmm
+
+TailPC1<- principal(TailNumb[-10,-10], nfactors=1)
+TailPC1
+TailPC2<- principal(TailNumb[,-32], nfactors=2)
+TailPC2
+#Nuts. It looks like there's not enough data?
+
+pca1 <- prcomp(TailNumb)
+pca
+
+?prcomp
+###View eigenvectors and eigenvalues of the principal components:
+summary(pca)
+#PC1 explains about 79.13%
+#PC2 explains about 5.264%
+#Looks like we need 4 PC's to reach 90% explained
+
+loadings(pca)
+pca$scores
+
+plot(pca)
+
+library(calibrate)
+
+plot(pca$scores[,2]~pca$scores[,1], pch=21, cex=2, col="black", bg=as.character(Tails[,2]), xlab="PC 1", ylab="PC 2", main="Matthew's Real Graph")
+textxy(cex=.75, pca$scores[,1], pca$scores[,2], I_N, offset = 0.5)
