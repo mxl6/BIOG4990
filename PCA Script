@@ -7,6 +7,8 @@ setwd("/Users/mintwealth/Documents/Ses 4/4990/S17 WD")
 getwd()
 dir()
 
+#Trying out GitHub
+
 ###Importing data into R.
 # Here, I have used a comma-separated .csv file:
 #, stringsAsFactors=FALSE
