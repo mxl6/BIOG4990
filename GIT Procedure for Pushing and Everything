@@ -1,0 +1,9 @@
+#In GIT, not GH
+In the shell in Rstudio
+we type in:
+git clone <URL>
+Make your edits
+git add <filename> # For every file you edited
+git commit -m "<Your commit message, describing the changes you made>"
+git push origin
+#Type in GitHhub username and password
