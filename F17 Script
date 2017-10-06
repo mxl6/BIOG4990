@@ -1,0 +1,47 @@
+#Okay, let's try this from https://www.r-bloggers.com/principal-component-analysis-in-r/
+
+#S17 Spreadsheet is here: https://docs.google.com/spreadsheets/d/13GFw004SI96wYMcSsDMXtUinV_jSlt4OEUZtIYFgNdw/edit#gid=693934932
+
+#First let's set the WD, and find the file we want
+getwd ()
+setwd("/Users/mintwealth/documents/S5/4990")
+getwd()
+dir()
+
+#Now let's put in the CSV sheet
+Skull=read.csv("F17maybe.csv")
+attach(Skull)
+View(Skull)
+
+#This time, we'll try the "prcomp()" function
+#I learned over the summer that settinge everything to "numeric" doesn't work as it seems.
+#We'll instead just choose the portion of the dataframe that is numeric
+
+SkullPCA=prcomp(Skull[1:141,2:43])
+
+#Now we'll plot the first two columns of "SkullPCA," as those are the first 2 PC's.
+plot(SkullPCA$x[,1:2], pch=21, cex=2, col="black", bg=as.character(Skull[,44]), main = "Matthew's F17 Graph")
+with(SkullPCA, text(SkullPCA$x[,1:2], labels = row.names(Skull), cex = 0.5, pos = 1))
+
+#Now let's plot loadings
+#We need these things first.
+source("https://bioconductor.org/biocLite.R")
+biocLite("pcaMethods")
+library(pcaMethods)
+
+#Now we can plot
+SkullPCAmethods <- pca(Skull[1:141,2:43], scale = "uv", center = T, nPcs = 2, method = "svd")
+slplot(SkullPCAmethods, scoresLoadings = c(F,T), lcex=0.6)
+#The function can plot scores (PC's), next to loadings, but that doesn't work, so I set scores to F.
+
+#I still don't know how to standardize size, so we can compare just shape differences.
+
+#So for now, let's just try omitting the dark green washingtons, to see what we get.
+WSkullPCA=prcomp(Skull[1:127,2:43])
+WSkullPCA$x[,1:2]
+
+plot(WSkullPCA$x[,1:2], pch=21, cex=2, col="black", bg=as.character(Skull[,44]), main = "Matthew's F17 Graph Without Washington")
+with(WSkullPCA, text(WSkullPCA$x[,1:2], labels = row.names(Skull[1:127,]), cex = 0.5, pos = 1))
+
+WSkullPCAmethods <- pca(Skull[1:127,2:43], scale = "uv", center = T, nPcs = 2, method = "svd")
+slplot(WSkullPCAmethods, scoresLoadings = c(F,T), lcex=0.6)
